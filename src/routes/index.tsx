@@ -133,8 +133,15 @@ function Hero() {
         <div className="absolute top-24 left-6 md:left-10 font-mono-caption text-primary/80">
           [ 01 / INDEX ]
         </div>
-        <div className="absolute top-24 right-6 md:right-10 font-mono-caption text-white/60">
-          LAT 37.77 · LON -122.41
+        <div className="absolute top-24 right-6 md:right-10 flex items-center gap-4 font-mono-caption text-white/60">
+          <span className="hidden md:inline">PROFILE_IMG</span>
+          <div className="relative h-16 w-16 overflow-hidden rounded-full border-2 border-primary/50 bg-card/50 shadow-[0_0_24px_rgba(0,0,0,0.4)] backdrop-blur-sm">
+            <img
+              src={heroRobot}
+              alt="Blake Chang — profile photo placeholder"
+              className="h-full w-full object-cover opacity-70"
+            />
+          </div>
         </div>
         <div className="absolute bottom-10 left-6 md:left-10 font-mono-caption text-white/60">
           <span className="mr-2 inline-block h-2 w-2 animate-pulse rounded-full bg-primary" />
