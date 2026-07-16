@@ -135,7 +135,7 @@ function Hero() {
         </div>
         <div className="absolute top-24 right-6 md:right-10 flex items-center gap-4 font-mono-caption text-white/60">
           <span className="hidden md:inline">PROFILE_IMG</span>
-          <div className="relative h-16 w-16 overflow-hidden rounded-full border-2 border-primary/50 bg-card/50 shadow-[0_0_24px_rgba(0,0,0,0.4)] backdrop-blur-sm">
+          <div className="relative h-32 w-32 md:h-40 md:w-40 overflow-hidden rounded-full border-[3px] border-primary/50 bg-card/50 shadow-[0_0_32px_rgba(0,0,0,0.5)] backdrop-blur-sm">
             <img
               src={heroRobot}
               alt="Blake Chang — profile photo placeholder"
