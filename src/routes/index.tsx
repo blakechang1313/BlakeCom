@@ -1,7 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { ArrowUpRight, Mail, Github, Linkedin, Cpu, Bot, Brain } from "lucide-react";
+import { motion } from "framer-motion";
+import {
+  ArrowUpRight,
+  FileText,
+  Github,
+  Linkedin,
+  Mail,
+} from "lucide-react";
 
 import heroRobot from "@/assets/hero-robot.jpg";
 import project1 from "@/assets/project-1.jpg";
@@ -9,6 +14,23 @@ import project2 from "@/assets/project-2.jpg";
 import project3 from "@/assets/project-3.jpg";
 
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Blake Chang — AI & Robotics Engineer" },
+      {
+        name: "description",
+        content:
+          "Blake Chang is an AI and robotics engineer working across robot learning, perception, and autonomous systems.",
+      },
+      { property: "og:title", content: "Blake Chang — AI & Robotics Engineer" },
+      {
+        property: "og:description",
+        content: "Research, projects, and experience in AI, robotics, and autonomous systems.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
@@ -20,7 +42,7 @@ const projects = [
     year: "2025",
     img: project1,
     blurb:
-      "Sim-to-real policy for a 7-DoF arm performing sub-millimeter assembly tasks under partial observability.",
+      "A sim-to-real policy for a 7-DoF arm performing sub-millimeter assembly tasks under partial observability.",
   },
   {
     id: "02",
@@ -29,7 +51,7 @@ const projects = [
     year: "2024",
     img: project2,
     blurb:
-      "Onboard perception + terrain-aware locomotion stack for a legged robot navigating unstructured warehouses.",
+      "An onboard perception and terrain-aware locomotion stack for a legged robot navigating unstructured warehouses.",
   },
   {
     id: "03",
@@ -38,7 +60,7 @@ const projects = [
     year: "2024",
     img: project3,
     blurb:
-      "Latent world model that predicts contact-rich dynamics, enabling planning inside a learned physics engine.",
+      "A latent world model that predicts contact-rich dynamics, enabling planning inside a learned physics engine.",
   },
 ];
 
@@ -60,326 +82,202 @@ const skills = [
   "SLAM",
   "Computer Vision",
   "Control Theory",
-  "Rust",
-  "Onboard Compute",
 ];
+
+const reveal = {
+  initial: { opacity: 0, y: 18 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const },
+};
 
 function Index() {
   return (
-    <div className="relative min-h-screen overflow-x-clip bg-background text-foreground">
-      <Nav />
-      <Hero />
-      <Marquee />
-      <About />
-      <Projects />
-      <Experience />
-      <Contact />
-      <Footer />
-    </div>
+    <main className="min-h-screen bg-background text-foreground">
+      <div className="mx-auto w-full max-w-4xl px-6 py-10 sm:px-8 md:py-16">
+        <ProfileHeader />
+        <Projects />
+        <Experience />
+        <Contact />
+      </div>
+    </main>
   );
 }
 
-function Nav() {
+function ProfileHeader() {
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 mix-blend-difference">
-      <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 py-5 md:px-10">
-        <a href="#top" className="font-display text-lg font-semibold tracking-tight text-white">
-          BLAKE<span className="text-primary">.</span>CHANG
-        </a>
-        <nav className="hidden gap-8 font-mono-caption text-white/80 md:flex">
-          <a href="#work" className="hover:text-primary transition-colors">Work</a>
-          <a href="#about" className="hover:text-primary transition-colors">About</a>
-          <a href="#experience" className="hover:text-primary transition-colors">Experience</a>
-          <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
-        </nav>
-        <a
-          href="#contact"
-          className="font-mono-caption text-white hover:text-primary transition-colors"
+    <header className="mb-20 border-b border-border pb-14">
+      <div className="flex flex-col-reverse gap-8 sm:flex-row sm:items-start sm:justify-between">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-2xl"
         >
-          Say Hi →
-        </a>
+          <p className="mb-3 font-mono text-xs font-medium uppercase text-primary">
+            AI · Robotics · Autonomous Systems
+          </p>
+          <h1 className="font-display text-4xl font-bold sm:text-5xl">Blake Chang</h1>
+          <p className="mt-2 text-base font-medium text-muted-foreground">
+            AI &amp; Robotics Engineer
+          </p>
+          <p className="mt-6 max-w-xl leading-7 text-muted-foreground">
+            I build machines that <strong className="font-semibold text-foreground">think and move</strong>.
+            My work lives between the deep-learning stack and the physical world—perception,
+            planning, control, and the fragile handshake between them.
+          </p>
+
+          <nav aria-label="Profile links" className="mt-7 flex flex-wrap gap-2">
+            <ProfileLink href="mailto:hello@blakechang.dev" label="Email" icon={Mail} />
+            <ProfileLink href="#contact" label="GitHub" icon={Github} />
+            <ProfileLink href="#contact" label="LinkedIn" icon={Linkedin} />
+            <ProfileLink href="#experience" label="Resume" icon={FileText} />
+          </nav>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.94 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.55, delay: 0.12 }}
+          className="relative h-36 w-36 shrink-0 overflow-hidden rounded-lg border-2 border-primary/30 bg-card shadow-sm sm:h-40 sm:w-40"
+        >
+          <img
+            src={heroRobot}
+            alt="Blake Chang profile photo placeholder"
+            width={160}
+            height={160}
+            className="h-full w-full object-cover"
+          />
+          <span className="absolute bottom-2 right-2 h-3 w-3 rounded-full border-2 border-background bg-primary" />
+        </motion.div>
+      </div>
+
+      <div className="mt-12 grid gap-8 border-t border-border pt-8 md:grid-cols-[1fr_2fr]">
+        <p className="font-mono text-xs font-medium uppercase text-muted-foreground">Research focus</p>
+        <div className="grid gap-6 sm:grid-cols-3">
+          {[
+            ["01", "Robot learning"],
+            ["02", "Embodied perception"],
+            ["03", "Autonomous control"],
+          ].map(([number, label]) => (
+            <div key={number}>
+              <span className="font-mono text-xs text-primary">{number}</span>
+              <p className="mt-2 font-display text-sm font-semibold">{label}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </header>
   );
 }
 
-function Hero() {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.15]);
-
-  const lines = ["DREAM BIG.", "WORK BIG.", "BREAK THE LIMIT."];
-
+function ProfileLink({
+  href,
+  label,
+  icon: Icon,
+}: {
+  href: string;
+  label: string;
+  icon: typeof Mail;
+}) {
   return (
-    <section id="top" ref={ref} className="relative h-screen w-full overflow-hidden">
-      <motion.div style={{ y, scale }} className="absolute inset-0">
-        <img
-          src={heroRobot}
-          alt="Robotic arm in dark lab"
-          width={1600}
-          height={1808}
-          className="h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-background/60" />
-        <div className="absolute inset-0" style={{ background: "var(--gradient-glow)" }} />
-        <div className="absolute inset-0 grid-lines opacity-40" />
-        <div className="absolute inset-x-0 bottom-0 h-64" style={{ background: "var(--gradient-fade)" }} />
-      </motion.div>
-
-      {/* Corner captions */}
-      <div className="pointer-events-none absolute inset-0 z-10">
-        <div className="absolute top-24 left-6 md:left-10 font-mono-caption text-primary/80">
-          [ 01 / INDEX ]
-        </div>
-        <div className="absolute top-24 right-6 md:right-10 flex items-center gap-4 font-mono-caption text-white/60">
-          <span className="hidden md:inline">PROFILE_IMG</span>
-          <div className="relative h-32 w-32 md:h-40 md:w-40 overflow-hidden rounded-full border-[3px] border-primary/50 bg-card/50 shadow-[0_0_32px_rgba(0,0,0,0.5)] backdrop-blur-sm">
-            <img
-              src={heroRobot}
-              alt="Blake Chang — profile photo placeholder"
-              className="h-full w-full object-cover opacity-70"
-            />
-          </div>
-        </div>
-        <div className="absolute bottom-10 left-6 md:left-10 font-mono-caption text-white/60">
-          <span className="mr-2 inline-block h-2 w-2 animate-pulse rounded-full bg-primary" />
-          SYSTEM ONLINE
-        </div>
-        <div className="absolute bottom-10 right-6 md:right-10 font-mono-caption text-white/60">
-          SCROLL ↓
-        </div>
-      </div>
-
-      {/* Headline */}
-      <motion.div style={{ opacity }} className="relative z-10 flex h-full flex-col justify-center px-6 md:px-10">
-        <div className="max-w-[1600px] mx-auto w-full">
-          <div className="mb-8 font-mono-caption text-primary">
-            Blake Chang — Welcome to my world
-          </div>
-          {lines.map((line, i) => (
-            <motion.h1
-              key={line}
-              initial={{ y: 60, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.9, delay: 0.15 * i, ease: [0.16, 1, 0.3, 1] }}
-              className="font-display text-[14vw] font-bold uppercase leading-[0.9] tracking-tighter text-white md:text-[10vw]"
-            >
-              {line.split("").map((ch, j) => (
-                <span key={j} className={ch === "." ? "text-primary text-glow" : ""}>
-                  {ch}
-                </span>
-              ))}
-            </motion.h1>
-          ))}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.9 }}
-            className="mt-10 max-w-md font-mono text-sm text-white/60"
-          >
-            AI &amp; Robotics engineer. Building autonomous systems that see, decide, and move — from the policy net down to the joint torque.
-          </motion.div>
-        </div>
-      </motion.div>
-    </section>
+    <a
+      href={href}
+      className="inline-flex h-9 items-center gap-2 rounded-md border border-border bg-card px-3 font-mono text-xs font-medium uppercase text-muted-foreground transition-colors hover:border-primary hover:bg-accent hover:text-accent-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+      title={label}
+    >
+      <Icon aria-hidden="true" className="h-4 w-4" strokeWidth={1.8} />
+      {label}
+    </a>
   );
 }
 
-function Marquee() {
-  const words = ["ROBOTICS", "AI", "AUTONOMY", "PERCEPTION", "CONTROL", "LEARNING"];
-  const row = [...words, ...words, ...words];
+function SectionHeading({ number, children }: { number: string; children: string }) {
   return (
-    <div className="relative overflow-hidden border-y border-border bg-background py-8">
-      <div className="flex w-max animate-marquee gap-16 whitespace-nowrap font-display text-6xl font-bold uppercase text-white/10 md:text-8xl">
-        {row.map((w, i) => (
-          <span key={i} className="flex items-center gap-16">
-            {w}
-            <span className="text-primary">◆</span>
-          </span>
-        ))}
-      </div>
+    <div className="mb-8 flex items-center gap-4">
+      <span className="font-mono text-xs text-primary">{number}</span>
+      <h2 className="font-mono text-xs font-semibold uppercase text-muted-foreground">{children}</h2>
+      <span className="h-px flex-1 bg-border" />
     </div>
-  );
-}
-
-function About() {
-  return (
-    <section id="about" className="relative px-6 py-32 md:px-10 md:py-48">
-      <div className="mx-auto max-w-[1600px]">
-        <div className="mb-16 flex items-baseline justify-between border-b border-border pb-6">
-          <span className="font-mono-caption text-primary">[ 02 / ABOUT ]</span>
-          <span className="font-mono-caption text-muted-foreground">WHO / WHAT / WHY</span>
-        </div>
-        <div className="grid gap-16 md:grid-cols-12">
-          <div className="md:col-span-5">
-            <div className="sticky top-24">
-              <div className="mb-6 h-px w-24 bg-primary" />
-              <h2 className="font-display text-5xl font-bold leading-tight text-white md:text-6xl">
-                I build machines that <span className="text-primary">think</span> and <span className="text-primary">move</span>.
-              </h2>
-            </div>
-          </div>
-          <div className="md:col-span-7 md:col-start-7">
-            <div className="space-y-8 text-lg leading-relaxed text-white/80">
-              <p>
-                I'm Blake — an AI and robotics engineer obsessed with the point where <span className="text-primary">bits meet actuators</span>. My work lives between the deep-learning stack and the physical world: perception, planning, control, and the fragile handshake between them.
-              </p>
-              <p>
-                From dexterous manipulation to legged autonomy, I chase problems where a policy has to survive contact with reality. I care about elegant abstractions and about the messy, humbling nature of a robot doing the wrong thing at 3am.
-              </p>
-              <p className="font-mono-caption text-primary">— Dream big. Work big. Break the limit.</p>
-            </div>
-
-            <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-3">
-              {[
-                { icon: Brain, label: "Learning" },
-                { icon: Cpu, label: "Compute" },
-                { icon: Bot, label: "Embodiment" },
-              ].map(({ icon: Icon, label }) => (
-                <div key={label} className="border border-border bg-card/40 p-6 backdrop-blur-sm">
-                  <Icon className="mb-4 h-6 w-6 text-primary" strokeWidth={1.5} />
-                  <div className="font-mono-caption text-muted-foreground">{label}</div>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-12 border-t border-border pt-8">
-              <div className="mb-4 font-mono-caption text-muted-foreground">// Stack</div>
-              <div className="flex flex-wrap gap-2">
-                {skills.map((s) => (
-                  <span
-                    key={s}
-                    className="border border-border px-3 py-1.5 font-mono text-xs text-white/80 hover:border-primary hover:text-primary transition-colors"
-                  >
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   );
 }
 
 function Projects() {
   return (
-    <section id="work" className="relative px-6 py-32 md:px-10 md:py-48">
-      <div className="mx-auto max-w-[1600px]">
-        <div className="mb-16 flex items-baseline justify-between border-b border-border pb-6">
-          <span className="font-mono-caption text-primary">[ 03 / SELECTED WORK ]</span>
-          <span className="font-mono-caption text-muted-foreground">2023 — 2025</span>
-        </div>
-
-        <div className="space-y-32">
-          {projects.map((p, i) => (
-            <ProjectRow key={p.id} project={p} reverse={i % 2 === 1} />
-          ))}
-        </div>
+    <section id="work" className="scroll-mt-12">
+      <SectionHeading number="01">Selected work</SectionHeading>
+      <div className="space-y-12">
+        {projects.map((project) => (
+          <motion.article
+            key={project.id}
+            {...reveal}
+            className="group grid gap-6 sm:grid-cols-[minmax(0,0.8fr)_minmax(0,1.7fr)] sm:items-start"
+          >
+            <div className="aspect-[4/3] overflow-hidden rounded-md border border-border bg-card">
+              <img
+                src={project.img}
+                alt={project.title}
+                width={640}
+                height={480}
+                loading="lazy"
+                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              />
+            </div>
+            <div className="pt-1">
+              <div className="font-mono text-xs text-primary">
+                {project.tag} · {project.year}
+              </div>
+              <h3 className="mt-2 font-display text-2xl font-semibold transition-colors group-hover:text-primary">
+                {project.title}
+              </h3>
+              <p className="mt-3 text-sm leading-6 text-muted-foreground">{project.blurb}</p>
+              <a
+                href="#contact"
+                className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+              >
+                Case study
+                <ArrowUpRight aria-hidden="true" className="h-4 w-4" />
+              </a>
+            </div>
+          </motion.article>
+        ))}
       </div>
     </section>
   );
 }
 
-function ProjectRow({
-  project,
-  reverse,
-}: {
-  project: (typeof projects)[number];
-  reverse: boolean;
-}) {
-  const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"],
-  });
-  const y = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 60 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-      className={`grid gap-8 md:grid-cols-12 ${reverse ? "md:[direction:rtl]" : ""}`}
-    >
-      <div className="relative aspect-[7/5] overflow-hidden bg-card md:col-span-7 md:[direction:ltr]">
-        <motion.img
-          style={{ y }}
-          src={project.img}
-          alt={project.title}
-          width={1400}
-          height={1000}
-          loading="lazy"
-          className="absolute inset-0 h-[120%] w-full object-cover"
-        />
-        <div className="pointer-events-none absolute inset-0 border border-white/5" />
-        <div className="absolute top-4 left-4 font-mono-caption text-primary">
-          / {project.id}
-        </div>
-      </div>
-
-      <div className="flex flex-col justify-end md:col-span-4 md:col-start-9 md:[direction:ltr]">
-        <div className="mb-3 font-mono-caption text-muted-foreground">
-          {project.tag} · {project.year}
-        </div>
-        <h3 className="mb-4 font-display text-4xl font-bold text-white md:text-5xl">
-          {project.title}
-        </h3>
-        <p className="mb-6 text-white/70">{project.blurb}</p>
-        <a
-          href="#"
-          className="group inline-flex items-center gap-2 self-start border-b border-primary pb-1 font-mono-caption text-primary"
-        >
-          Case study
-          <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-        </a>
-      </div>
-    </motion.div>
-  );
-}
-
 function Experience() {
   return (
-    <section id="experience" className="relative px-6 py-32 md:px-10 md:py-48">
-      <div className="mx-auto max-w-[1600px]">
-        <div className="mb-16 flex items-baseline justify-between border-b border-border pb-6">
-          <span className="font-mono-caption text-primary">[ 04 / TIMELINE ]</span>
-          <span className="font-mono-caption text-muted-foreground">RUNTIME LOG</span>
+    <section id="experience" className="scroll-mt-12 py-20">
+      <SectionHeading number="02">Experience &amp; toolkit</SectionHeading>
+      <div className="grid gap-12 md:grid-cols-[1.5fr_1fr]">
+        <div>
+          {experience.map((item, index) => (
+            <motion.div
+              key={item.year + item.role}
+              {...reveal}
+              transition={{ ...reveal.transition, delay: index * 0.05 }}
+              className="grid grid-cols-[5rem_1fr] gap-4 border-b border-border py-5 first:pt-0"
+            >
+              <span className="font-mono text-xs text-primary">{item.year}</span>
+              <div>
+                <h3 className="font-display font-semibold">{item.role}</h3>
+                <p className="mt-1 text-sm text-muted-foreground">{item.org}</p>
+              </div>
+            </motion.div>
+          ))}
         </div>
-
-        <div className="grid gap-16 md:grid-cols-12">
-          <div className="md:col-span-4">
-            <h2 className="font-display text-5xl font-bold leading-none text-white md:text-6xl">
-              A path across
-              <br />
-              <span className="text-primary">labs &amp; teams.</span>
-            </h2>
-          </div>
-          <div className="md:col-span-7 md:col-start-6">
-            <ol className="relative border-l border-border">
-              {experience.map((e, i) => (
-                <motion.li
-                  key={e.year + e.role}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: i * 0.08 }}
-                  className="group relative pl-8 pb-10"
-                >
-                  <span className="absolute -left-[7px] top-2 h-3 w-3 rounded-full bg-background ring-2 ring-primary transition-all group-hover:scale-125 group-hover:bg-primary" />
-                  <div className="font-mono-caption text-primary">{e.year}</div>
-                  <div className="mt-2 font-display text-2xl font-semibold text-white md:text-3xl">
-                    {e.role}
-                  </div>
-                  <div className="mt-1 text-white/60">{e.org}</div>
-                </motion.li>
-              ))}
-            </ol>
+        <div>
+          <p className="mb-4 font-mono text-xs font-semibold uppercase text-muted-foreground">Working stack</p>
+          <div className="flex flex-wrap gap-2">
+            {skills.map((skill) => (
+              <span
+                key={skill}
+                className="rounded-md border border-border bg-card px-2.5 py-1.5 font-mono text-xs text-muted-foreground"
+              >
+                {skill}
+              </span>
+            ))}
           </div>
         </div>
       </div>
@@ -389,62 +287,26 @@ function Experience() {
 
 function Contact() {
   return (
-    <section id="contact" className="relative overflow-hidden border-t border-border bg-background px-6 py-32 md:px-10 md:py-48">
-      <div className="absolute inset-0 grid-lines opacity-30" />
-      <div className="absolute inset-0" style={{ background: "var(--gradient-glow)" }} />
-      <div className="relative mx-auto max-w-[1600px]">
-        <div className="mb-16 flex items-baseline justify-between border-b border-border pb-6">
-          <span className="font-mono-caption text-primary">[ 05 / TRANSMIT ]</span>
-          <span className="font-mono-caption text-muted-foreground">END OF INDEX</span>
-        </div>
-
-        <div className="max-w-4xl">
-          <div className="font-mono-caption text-primary mb-6">Let's build something</div>
-          <h2 className="font-display text-6xl font-bold uppercase leading-[0.95] tracking-tight text-white md:text-[9vw]">
-            Say hello<span className="text-primary">.</span>
-          </h2>
-          <p className="mt-8 max-w-xl text-lg text-white/70">
-            Collaborations, research chats, or a robot that's misbehaving — my inbox is open.
+    <footer id="contact" className="scroll-mt-12 border-t border-border pt-10">
+      <div className="flex flex-col justify-between gap-8 sm:flex-row sm:items-end">
+        <div>
+          <p className="font-mono text-xs font-medium uppercase text-primary">Open to collaboration</p>
+          <h2 className="mt-3 font-display text-3xl font-bold">Let&apos;s build something.</h2>
+          <p className="mt-3 max-w-lg text-sm leading-6 text-muted-foreground">
+            Research conversations, robotics collaborations, or an ambitious system that needs to move from simulation into reality.
           </p>
-
-          <div className="mt-12 flex flex-wrap gap-4">
-            <a
-              href="mailto:hello@blakechang.dev"
-              className="group inline-flex items-center gap-3 border border-primary bg-primary/10 px-6 py-4 font-mono-caption text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
-            >
-              <Mail className="h-4 w-4" />
-              hello@blakechang.dev
-              <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-            </a>
-            <a
-              href="#"
-              className="inline-flex items-center gap-3 border border-border px-6 py-4 font-mono-caption text-white/80 transition-colors hover:border-primary hover:text-primary"
-            >
-              <Github className="h-4 w-4" /> Github
-            </a>
-            <a
-              href="#"
-              className="inline-flex items-center gap-3 border border-border px-6 py-4 font-mono-caption text-white/80 transition-colors hover:border-primary hover:text-primary"
-            >
-              <Linkedin className="h-4 w-4" /> LinkedIn
-            </a>
-          </div>
         </div>
+        <a
+          href="mailto:hello@blakechang.dev"
+          className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+        >
+          <Mail aria-hidden="true" className="h-4 w-4" />
+          Email me
+        </a>
       </div>
-    </section>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="border-t border-border px-6 py-8 md:px-10">
-      <div className="mx-auto flex max-w-[1600px] flex-col items-start justify-between gap-4 font-mono-caption text-muted-foreground md:flex-row md:items-center">
-        <div>© {new Date().getFullYear()} Blake Chang</div>
-        <div className="flex items-center gap-2">
-          <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-primary" />
-          All systems nominal
-        </div>
-        <div>Built with intent.</div>
+      <div className="mt-16 flex flex-col justify-between gap-2 border-t border-border py-6 font-mono text-xs text-muted-foreground sm:flex-row">
+        <span>© {new Date().getFullYear()} Blake Chang</span>
+        <span>Dream big. Work big. Break the limit.</span>
       </div>
     </footer>
   );
