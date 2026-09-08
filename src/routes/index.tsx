@@ -93,8 +93,10 @@ const reveal = {
 
 function Index() {
   return (
-    <main className="min-h-screen bg-background text-foreground">
-      <div className="mx-auto w-full max-w-4xl px-6 py-10 sm:px-8 md:py-16">
+    <main className="relative min-h-screen overflow-hidden bg-background text-foreground">
+      <div className="pointer-events-none fixed inset-0 grid-lines opacity-35" />
+      <div className="pointer-events-none fixed inset-x-0 top-0 h-[34rem]" style={{ background: "var(--gradient-glow)" }} />
+      <div className="relative mx-auto w-full max-w-4xl px-6 py-10 sm:px-8 md:py-16">
         <ProfileHeader />
         <Projects />
         <Experience />
@@ -117,7 +119,7 @@ function ProfileHeader() {
           <p className="mb-3 font-mono text-xs font-medium uppercase text-primary">
             AI · Robotics · Autonomous Systems
           </p>
-          <h1 className="font-display text-4xl font-bold sm:text-5xl">Blake Chang</h1>
+          <h1 className="font-display text-4xl font-bold sm:text-5xl">Blake Chang<span className="text-primary">.</span></h1>
           <p className="mt-2 text-base font-medium text-muted-foreground">
             AI &amp; Robotics Engineer
           </p>
@@ -139,7 +141,7 @@ function ProfileHeader() {
           initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.55, delay: 0.12 }}
-          className="relative h-36 w-36 shrink-0 overflow-hidden rounded-lg border-2 border-primary/30 bg-card shadow-sm sm:h-40 sm:w-40"
+          className="relative h-36 w-36 shrink-0 overflow-hidden rounded-full border-2 border-primary/60 bg-card shadow-[var(--shadow-glow)] sm:h-40 sm:w-40"
         >
           <img
             src={heroRobot}
@@ -183,7 +185,7 @@ function ProfileLink({
   return (
     <a
       href={href}
-      className="inline-flex h-9 items-center gap-2 rounded-md border border-border bg-card px-3 font-mono text-xs font-medium uppercase text-muted-foreground transition-colors hover:border-primary hover:bg-accent hover:text-accent-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+      className="inline-flex h-9 items-center gap-2 rounded-md border border-border bg-card/70 px-3 font-mono text-xs font-medium uppercase text-muted-foreground backdrop-blur-sm transition-colors hover:border-primary hover:bg-primary/10 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       title={label}
     >
       <Icon aria-hidden="true" className="h-4 w-4" strokeWidth={1.8} />
