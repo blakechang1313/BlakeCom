@@ -1,12 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import {
-  ArrowUpRight,
-  FileText,
-  Github,
-  Linkedin,
-  Mail,
-} from "lucide-react";
+import { ArrowUpRight, FileText, Github, Linkedin, Mail } from "lucide-react";
 
 import heroRobot from "@/assets/hero-robot.jpg";
 import project1 from "@/assets/project-1.jpg";
@@ -16,16 +10,17 @@ import project3 from "@/assets/project-3.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Blake Chang — AI & Robotics Engineer" },
+      { title: "Blake Chang — Robot Learning, NYU CILVR Group" },
       {
         name: "description",
         content:
-          "Blake Chang is an AI and robotics engineer working across robot learning, perception, and autonomous systems.",
+          "Blake Chang is an NYU Math & CS undergrad working with Lerrel Pinto at the NYU CILVR Group on robot learning, reinforcement learning, and world models.",
       },
-      { property: "og:title", content: "Blake Chang — AI & Robotics Engineer" },
+      { property: "og:title", content: "Blake Chang — Robot Learning, NYU CILVR Group" },
       {
         property: "og:description",
-        content: "Research, projects, and experience in AI, robotics, and autonomous systems.",
+        content:
+          "Research in robot learning, reinforcement learning, and world models at the NYU CILVR Group.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -37,51 +32,25 @@ export const Route = createFileRoute("/")({
 const projects = [
   {
     id: "01",
-    title: "Dexterous Manipulation",
-    tag: "Reinforcement Learning · ROS2",
-    year: "2025",
+    title: "releasing soon",
+    tag: "TBA",
+    year: "2026",
     img: project1,
-    blurb:
-      "A sim-to-real policy for a 7-DoF arm performing sub-millimeter assembly tasks under partial observability.",
-  },
-  {
-    id: "02",
-    title: "Quadruped Autonomy",
-    tag: "SLAM · Perception · Control",
-    year: "2024",
-    img: project2,
-    blurb:
-      "An onboard perception and terrain-aware locomotion stack for a legged robot navigating unstructured warehouses.",
-  },
-  {
-    id: "03",
-    title: "Neural World Models",
-    tag: "PyTorch · Diffusion · JAX",
-    year: "2024",
-    img: project3,
-    blurb:
-      "A latent world model that predicts contact-rich dynamics, enabling planning inside a learned physics engine.",
+    blurb: "TBA",
   },
 ];
 
 const experience = [
-  { year: "2025 —", role: "Robotics Researcher", org: "Autonomous Systems Lab" },
-  { year: "2024", role: "AI Engineer, Manipulation", org: "Frontier Robotics" },
-  { year: "2023", role: "ML Engineer Intern", org: "Applied Intelligence Group" },
-  { year: "2022", role: "B.S. Robotics Engineering", org: "Institute of Technology" },
-];
-
-const skills = [
-  "PyTorch",
-  "JAX",
-  "ROS 2",
-  "C++ / CUDA",
-  "Isaac Sim",
-  "MoveIt",
-  "Reinforcement Learning",
-  "SLAM",
-  "Computer Vision",
-  "Control Theory",
+  {
+    year: "Current",
+    role: "Undergraduate Researcher",
+    org: "NYU CILVR Group, advised by Lerrel Pinto",
+  },
+  {
+    year: "2022-2024",
+    role: "Team vice president + driver",
+    org: "VEX robotics - ranked 31th in 20000+ teams, 7th in Asia  ",
+  },
 ];
 
 const reveal = {
@@ -95,7 +64,10 @@ function Index() {
   return (
     <main className="relative min-h-screen overflow-hidden bg-background text-foreground">
       <div className="pointer-events-none fixed inset-0 grid-lines opacity-35" />
-      <div className="pointer-events-none fixed inset-x-0 top-0 h-[34rem]" style={{ background: "var(--gradient-glow)" }} />
+      <div
+        className="pointer-events-none fixed inset-x-0 top-0 h-[34rem]"
+        style={{ background: "var(--gradient-glow)" }}
+      />
       <div className="relative mx-auto w-full max-w-4xl px-6 py-10 sm:px-8 md:py-16">
         <ProfileHeader />
         <Projects />
@@ -119,21 +91,56 @@ function ProfileHeader() {
           <p className="mb-3 font-mono text-xs font-medium uppercase text-primary">
             AI · Robotics · Autonomous Systems
           </p>
-          <h1 className="font-display text-4xl font-bold sm:text-5xl">Blake Chang<span className="text-primary">.</span></h1>
+          <h1 className="font-display text-4xl font-bold sm:text-5xl">
+            Blake Chang<span className="text-primary">.</span>
+          </h1>
           <p className="mt-2 text-base font-medium text-muted-foreground">
-            AI &amp; Robotics Engineer
+            NYU Math &amp; CS · member of GRAIL
           </p>
           <p className="mt-6 max-w-xl leading-7 text-muted-foreground">
-            I build machines that <strong className="font-semibold text-foreground">think and move</strong>.
-            My work lives between the deep-learning stack and the physical world—perception,
-            planning, control, and the fragile handshake between them.
+            I&apos;m a Math and CS undergrad at NYU, working with{" "}
+            <a
+              href="https://www.lerrelpinto.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+            >
+              Lerrel Pinto
+            </a>{" "}
+            at the{" "}
+            <a
+              href="https://wp.nyu.edu/cilvr/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-primary hover:decoration-primary"
+            >
+              NYU CILVR Group
+            </a>
+            . My research spans full-system robot learning, reinforcement learning, and world
+            models, with a growing interest in multimodal robots—I aim to bring robotics from
+            fiction into the real world.
           </p>
 
           <nav aria-label="Profile links" className="mt-7 flex flex-wrap gap-2">
-            <ProfileLink href="mailto:hello@blakechang.dev" label="Email" icon={Mail} />
-            <ProfileLink href="#contact" label="GitHub" icon={Github} />
-            <ProfileLink href="#contact" label="LinkedIn" icon={Linkedin} />
-            <ProfileLink href="#experience" label="Resume" icon={FileText} />
+            <ProfileLink
+              href="https://mail.google.com/mail/?view=cm&fs=1&to=blakeyuhao@gmail.com"
+              label="Email"
+              icon={Mail}
+              external
+            />
+            <ProfileLink
+              href="https://github.com/blakechang1313"
+              label="GitHub"
+              icon={Github}
+              external
+            />
+            <ProfileLink
+              href="https://www.linkedin.com/in/blake-chang1313/"
+              label="LinkedIn"
+              icon={Linkedin}
+              external
+            />
+            {/* <ProfileLink href="#experience" label="Resume" icon={FileText} /> */}
           </nav>
         </motion.div>
 
@@ -155,12 +162,14 @@ function ProfileHeader() {
       </div>
 
       <div className="mt-12 grid gap-8 border-t border-border pt-8 md:grid-cols-[1fr_2fr]">
-        <p className="font-mono text-xs font-medium uppercase text-muted-foreground">Research focus</p>
+        <p className="font-mono text-xs font-medium uppercase text-muted-foreground">
+          Research focus
+        </p>
         <div className="grid gap-6 sm:grid-cols-3">
           {[
             ["01", "Robot learning"],
-            ["02", "Embodied perception"],
-            ["03", "Autonomous control"],
+            ["02", "Reinforcement learning"],
+            ["03", "World models"],
           ].map(([number, label]) => (
             <div key={number}>
               <span className="font-mono text-xs text-primary">{number}</span>
@@ -177,14 +186,18 @@ function ProfileLink({
   href,
   label,
   icon: Icon,
+  external,
 }: {
   href: string;
   label: string;
   icon: typeof Mail;
+  external?: boolean;
 }) {
   return (
     <a
       href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
       className="inline-flex h-9 items-center gap-2 rounded-md border border-border bg-card/70 px-3 font-mono text-xs font-medium uppercase text-muted-foreground backdrop-blur-sm transition-colors hover:border-primary hover:bg-primary/10 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       title={label}
     >
@@ -198,7 +211,9 @@ function SectionHeading({ number, children }: { number: string; children: string
   return (
     <div className="mb-8 flex items-center gap-4">
       <span className="font-mono text-xs text-primary">{number}</span>
-      <h2 className="font-mono text-xs font-semibold uppercase text-muted-foreground">{children}</h2>
+      <h2 className="font-mono text-xs font-semibold uppercase text-muted-foreground">
+        {children}
+      </h2>
       <span className="h-px flex-1 bg-border" />
     </div>
   );
@@ -252,36 +267,21 @@ function Experience() {
   return (
     <section id="experience" className="scroll-mt-12 py-20">
       <SectionHeading number="02">Experience &amp; toolkit</SectionHeading>
-      <div className="grid gap-12 md:grid-cols-[1.5fr_1fr]">
-        <div>
-          {experience.map((item, index) => (
-            <motion.div
-              key={item.year + item.role}
-              {...reveal}
-              transition={{ ...reveal.transition, delay: index * 0.05 }}
-              className="grid grid-cols-[5rem_1fr] gap-4 border-b border-border py-5 first:pt-0"
-            >
-              <span className="font-mono text-xs text-primary">{item.year}</span>
-              <div>
-                <h3 className="font-display font-semibold">{item.role}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{item.org}</p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-        <div>
-          <p className="mb-4 font-mono text-xs font-semibold uppercase text-muted-foreground">Working stack</p>
-          <div className="flex flex-wrap gap-2">
-            {skills.map((skill) => (
-              <span
-                key={skill}
-                className="rounded-md border border-border bg-card px-2.5 py-1.5 font-mono text-xs text-muted-foreground"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-        </div>
+      <div>
+        {experience.map((item, index) => (
+          <motion.div
+            key={item.year + item.role}
+            {...reveal}
+            transition={{ ...reveal.transition, delay: index * 0.05 }}
+            className="grid grid-cols-[5rem_1fr] gap-4 border-b border-border py-5 first:pt-0"
+          >
+            <span className="font-mono text-xs text-primary">{item.year}</span>
+            <div>
+              <h3 className="font-display font-semibold">{item.role}</h3>
+              <p className="mt-1 text-sm text-muted-foreground">{item.org}</p>
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
@@ -292,14 +292,17 @@ function Contact() {
     <footer id="contact" className="scroll-mt-12 border-t border-border pt-10">
       <div className="flex flex-col justify-between gap-8 sm:flex-row sm:items-end">
         <div>
-          <p className="font-mono text-xs font-medium uppercase text-primary">Open to collaboration</p>
-          <h2 className="mt-3 font-display text-3xl font-bold">Let&apos;s build something.</h2>
-          <p className="mt-3 max-w-lg text-sm leading-6 text-muted-foreground">
-            Research conversations, robotics collaborations, or an ambitious system that needs to move from simulation into reality.
+          <p className="font-mono text-xs font-medium uppercase text-primary">
+            Open to collaboration
           </p>
+          <h3 className="mt-3 max-w-lg font-display text-lg font-semibold text-foreground">
+            If you find my research interesting or want to discuss it further, feel free to connect.
+          </h3>
         </div>
         <a
-          href="mailto:hello@blakechang.dev"
+          href="https://mail.google.com/mail/?view=cm&fs=1&to=blakeyuhao@gmail.com"
+          target="_blank"
+          rel="noopener noreferrer"
           className="inline-flex h-10 shrink-0 items-center justify-center gap-2 rounded-md bg-primary px-4 text-sm font-semibold text-primary-foreground transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
         >
           <Mail aria-hidden="true" className="h-4 w-4" />
