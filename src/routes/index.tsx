@@ -44,7 +44,7 @@ const experience = [
   {
     year: "Current",
     role: "Undergraduate Researcher",
-    org: "NYU CILVR Group, advised by Lerrel Pinto",
+    org: "GRAIL lab at NYU CILVR Group, advised by Lerrel Pinto",
   },
   {
     year: "2022-2024",
@@ -88,16 +88,17 @@ function ProfileHeader() {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="max-w-2xl"
         >
-          <p className="mb-3 font-mono text-xs font-medium uppercase text-primary">
-            AI · Robotics · Autonomous Systems
-          </p>
           <h1 className="font-display text-4xl font-bold sm:text-5xl">
             Blake Chang<span className="text-primary">.</span>
           </h1>
           <p className="mt-2 text-base font-medium text-muted-foreground">
             NYU Math &amp; CS · member of GRAIL
           </p>
-          <p className="mt-6 max-w-xl leading-7 text-muted-foreground">
+      
+          <div className="mt-6 max-w-xl leading-7 text-muted-foreground">
+            <div className="font-mono text-sm font-medium uppercase text-primary">
+              About Me
+            </div>
             I&apos;m a Math and CS undergrad at NYU, working with{" "}
             <a
               href="https://www.lerrelpinto.com/"
@@ -116,10 +117,10 @@ function ProfileHeader() {
             >
               NYU CILVR Group
             </a>
-            . My research spans full-system robot learning, reinforcement learning, and world
+            . My research majorly focuses on full-system robot learning, reinforcement learning, and world
             models, with a growing interest in multimodal robots—I aim to bring robotics from
             fiction into the real world.
-          </p>
+          </div>
 
           <nav aria-label="Profile links" className="mt-7 flex flex-wrap gap-2">
             <ProfileLink
